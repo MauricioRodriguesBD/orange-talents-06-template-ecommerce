@@ -15,7 +15,7 @@ import javax.validation.Payload;
 @Constraint(validatedBy = UniqueValueValidator.class)
 public @interface UniqueValue {
 
-	String message() default "Erro!";
+	String message() default "Erro : Email já Cadastrado!";
 
 	Class<?>[] groups() default {};
 

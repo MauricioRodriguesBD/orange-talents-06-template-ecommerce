@@ -25,6 +25,8 @@ public class Usuario {
 
 	@Length(min = 6)
 	private String senha;
+	
+	
 
 	@NotNull
 	private LocalDate dataCriacao = LocalDate.now();
