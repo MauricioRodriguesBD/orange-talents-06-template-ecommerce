@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
@@ -45,5 +46,17 @@ public class TokenManager {
 				.parseClaimsJws(jwt).getBody();
 		
 		return claims.getSubject();
+	}
+	
+	public boolean isValid(String jwt) {
+		try {
+			Jwts.parser().setSigningKey(this.secret).parseClaimsJws(jwt);			
+			return true;
+			
+		} catch (JwtException | IllegalArgumentException e) {			
+			return false;
+		}  
+	
 }
+	
 }

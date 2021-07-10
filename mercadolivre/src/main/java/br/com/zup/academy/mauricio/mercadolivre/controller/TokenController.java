@@ -1,10 +1,9 @@
 package br.com.zup.academy.mauricio.mercadolivre.controller;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
 
-import org.apache.catalina.User;
+
+
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +21,6 @@ import org.springframework.security.core.AuthenticationException;
 import br.com.zup.academy.mauricio.mercadolivre.request.TokenRequest;
 import br.com.zup.academy.mauricio.mercadolivre.response.TokenResponse;
 import br.com.zup.academy.mauricio.mercadolivre.security.TokenManager;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 
 @RestController
 @RequestMapping("/token")
