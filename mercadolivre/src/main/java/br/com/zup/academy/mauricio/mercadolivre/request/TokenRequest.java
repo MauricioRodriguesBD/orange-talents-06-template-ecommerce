@@ -22,13 +22,11 @@ public class TokenRequest {
 	public String getSenha() {
 		return senha;
 	}
-
-	@Override
-	public String toString() {
-		return "TokenRequest [email=" + email + ", senha=" + senha + "]";
-	}
 	
-	public Authentication geraOAuthentication() {
+
+
+	
+	public UsernamePasswordAuthenticationToken geraOAutenticador() {
 		return new UsernamePasswordAuthenticationToken(this.email,this.senha); 
 	}
 	
