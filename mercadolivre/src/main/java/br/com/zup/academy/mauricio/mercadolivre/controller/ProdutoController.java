@@ -35,6 +35,7 @@ public class ProdutoController {
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 	
+	@InitBinder
 	public void Init(WebDataBinder webDataBinder) {
 		webDataBinder.addValidators(new ProibeCaracteristicaComNomeIgualValidator());
 	}

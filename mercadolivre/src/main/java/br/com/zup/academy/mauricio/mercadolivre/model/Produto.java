@@ -123,4 +123,13 @@ public class Produto {
 		return dono;
 	}
 
+	public Set<CaracteristicaProduto> getCaracteristicas() {
+		return caracteristicas;
+	}
+
+	public void setCaracteristicas(Set<CaracteristicaProduto> caracteristicas) {
+		this.caracteristicas = caracteristicas;
+	}
+	
+
 }
