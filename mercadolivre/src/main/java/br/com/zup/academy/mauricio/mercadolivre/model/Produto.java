@@ -20,6 +20,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.zup.academy.mauricio.mercadolivre.request.NovaCaracteristicaRequest;
 
@@ -47,6 +48,10 @@ public class Produto {
 
 	@OneToMany(mappedBy = "produto", cascade = CascadeType.PERSIST)
 	private Set<CaracteristicaProduto> caracteristicas = new HashSet<>();
+
+	@OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
+	@JsonIgnore
+	private Set<ImagemProduto> imagem = new HashSet<>();
 
 	@NotNull
 	@ManyToOne
@@ -96,11 +101,16 @@ public class Produto {
 			return false;
 		return true;
 	}
-	
-	public <T> Set<T> mapeiaCaracteristicas(
-			Function<CaracteristicaProduto, T> funcaoMapeadora) {
-		return this.caracteristicas.stream().map(funcaoMapeadora)
+
+	public <T> Set<T> mapeiaCaracteristicas(Function<CaracteristicaProduto, T> funcaoMapeadora) {
+		return this.caracteristicas.stream().map(funcaoMapeadora).collect(Collectors.toSet());
+	}
+
+	public void associaImagem(Set<String> links) {
+		Set<ImagemProduto> imagem = links.stream().map(link -> new ImagemProduto(this, link))
 				.collect(Collectors.toSet());
+
+		this.imagem.addAll(imagem);
 	}
 
 	public String getNome() {
@@ -122,6 +132,15 @@ public class Produto {
 	public Usuario getDono() {
 		return dono;
 	}
+	
+
+	public BigDecimal getValor() {
+		return valor;
+	}
+
+	public Set<ImagemProduto> getImagem() {
+		return imagem;
+	}
 
 	public Set<CaracteristicaProduto> getCaracteristicas() {
 		return caracteristicas;
@@ -130,6 +149,15 @@ public class Produto {
 	public void setCaracteristicas(Set<CaracteristicaProduto> caracteristicas) {
 		this.caracteristicas = caracteristicas;
 	}
+
+	@Override
+	public String toString() {
+		return "Produto [id=" + id + ", nome=" + nome + ", valor=" + valor + ", quantidade=" + quantidade
+				+ ", descricao=" + descricao + ", categoria=" + categoria + ", caracteristicas=" + caracteristicas
+				+ ", imagem=" + imagem + ", dono=" + dono + ", data=" + data + "]";
+	}
+
+	
 	
 
 }
