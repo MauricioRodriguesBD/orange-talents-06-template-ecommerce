@@ -16,7 +16,7 @@ import br.com.zup.academy.mauricio.mercadolivre.model.Usuario;
 public class UsuarioLogado implements UserDetails {
 	
 	
-	private static final long serialVersionUID = 1L;
+	
 
 	private Usuario usuario;
 	

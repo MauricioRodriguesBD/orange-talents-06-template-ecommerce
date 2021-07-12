@@ -1,6 +1,6 @@
 package br.com.zup.academy.mauricio.mercadolivre.config;
 
-import javax.validation.constraints.Min;
+
 import javax.validation.constraints.NotBlank;
 
 import org.hibernate.validator.constraints.Length;
