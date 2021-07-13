@@ -52,6 +52,14 @@ public class Produto {
 	@OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
 	@JsonIgnore
 	private Set<ImagemProduto> imagem = new HashSet<>();
+	
+	@OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
+	private Set<PerguntaUsuario> pergunta = new HashSet<>();
+	
+	@OneToMany(mappedBy = "produto", cascade = CascadeType.MERGE)
+	private Set<Opiniao> opiniao = new HashSet<>();
+	
+	
 
 	@NotNull
 	@ManyToOne
