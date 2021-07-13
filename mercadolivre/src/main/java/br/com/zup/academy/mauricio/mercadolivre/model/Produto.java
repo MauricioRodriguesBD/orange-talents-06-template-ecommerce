@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -22,6 +24,7 @@ import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import br.com.zup.academy.mauricio.mercadolivre.others.Opinioes;
 import br.com.zup.academy.mauricio.mercadolivre.request.NovaCaracteristicaRequest;
 
 @Entity
@@ -145,6 +148,11 @@ public class Produto {
 	public BigDecimal getValor() {
 		return valor;
 	}
+	
+		
+	public Opinioes getOpiniao() {
+		return new Opinioes(this.opiniao);
+	}
 
 	public Set<ImagemProduto> getImagem() {
 		return imagem;
@@ -158,11 +166,14 @@ public class Produto {
 		this.caracteristicas = caracteristicas;
 	}
 
-	@Override
-	public String toString() {
-		return "Produto [id=" + id + ", nome=" + nome + ", valor=" + valor + ", quantidade=" + quantidade
-				+ ", descricao=" + descricao + ", categoria=" + categoria + ", caracteristicas=" + caracteristicas
-				+ ", imagem=" + imagem + ", dono=" + dono + ", data=" + data + "]";
+	public <T> Set<T> mapeiaImagens(Function<ImagemProduto, T> funcaoMapeadora) {
+		return this.imagem.stream().map(funcaoMapeadora)
+				.collect(Collectors.toSet());
+	}
+	
+	public <T extends Comparable<T>> SortedSet<T> mapeiaPerguntas(Function<PerguntaUsuario, T> funcaoMapeadora) {
+		return this.pergunta.stream().map(funcaoMapeadora)
+				.collect(Collectors.toCollection(TreeSet :: new));
 	}
 
 	
