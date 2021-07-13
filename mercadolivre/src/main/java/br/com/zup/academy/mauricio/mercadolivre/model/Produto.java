@@ -22,6 +22,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import javax.validation.constraints.Size;
 
+import org.springframework.util.Assert;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import br.com.zup.academy.mauricio.mercadolivre.others.Opinioes;
@@ -174,6 +176,18 @@ public class Produto {
 	public <T extends Comparable<T>> SortedSet<T> mapeiaPerguntas(Function<PerguntaUsuario, T> funcaoMapeadora) {
 		return this.pergunta.stream().map(funcaoMapeadora)
 				.collect(Collectors.toCollection(TreeSet :: new));
+	}
+
+	public boolean abataEstoque(@Positive int quantidade) {
+		Assert.isTrue(quantidade > 0, "A quantidade deve ser maior que zero para abater o estoque "+quantidade);
+		
+		if(quantidade <= this.quantidade) {
+			this.quantidade-=quantidade;
+			return true;
+			
+		}
+		
+		return false;
 	}
 
 	
