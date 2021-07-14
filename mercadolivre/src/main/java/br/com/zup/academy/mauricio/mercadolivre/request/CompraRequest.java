@@ -17,10 +17,13 @@ public class CompraRequest {
 	@NotNull
 	private GatewayPagamento gateway;
 
-	public CompraRequest(@Positive Integer quantidade, @NotNull Long idProduto) {
+	
+
+	public CompraRequest(@Positive Integer quantidade, @NotNull Long idProduto, @NotNull GatewayPagamento gateway) {
 		super();
 		this.quantidade = quantidade;
 		this.idProduto = idProduto;
+		this.gateway = gateway;
 	}
 
 	public Integer getQuantidade() {

@@ -8,6 +8,7 @@ import br.com.zup.academy.mauricio.mercadolivre.model.Compra;
 public enum GatewayPagamento {
 	pagseguro {
 		@Override
+		public
 		String criaUrlRetorno(Compra compra,
 				UriComponentsBuilder uriComponentsBuilder) {
 			String urlRetornoPagseguro = uriComponentsBuilder
@@ -20,6 +21,7 @@ public enum GatewayPagamento {
 	},
 	paypal {
 		@Override
+		public
 		String criaUrlRetorno(Compra compra,
 				UriComponentsBuilder uriComponentsBuilder) {
 			String urlRetornoPaypal = uriComponentsBuilder
@@ -30,7 +32,7 @@ public enum GatewayPagamento {
 		}
 	};
 
-	abstract String criaUrlRetorno(Compra compra,
+	public abstract String criaUrlRetorno(Compra compra,
 			UriComponentsBuilder uriComponentsBuilder);
 }
 
